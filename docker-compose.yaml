@@ -1,0 +1,42 @@
+version: "3"
+services:
+  yesu:
+    build: yesu/
+    ports:
+      - "8081:80"
+    volumes:
+      - "yesu-volume:/usr/share/nginx/html"
+    networks:
+      - "yesu-network"
+
+  thrinadh:
+    build: thrinadh/
+    ports:
+      - "8082:80"
+    volumes:
+      - "thrinadh-volume:/usr/share/nginx/html"
+    networks:
+      - "thrinadh-network"
+
+  mani:
+    build: mani/
+    ports:
+      - "8083:80" # Ensure no conflict with other services
+    volumes:
+      - "mani-volume:/usr/share/nginx/html"
+    networks:
+      - "mani-network"
+
+volumes:
+  yesu-volume:
+  thrinadh-volume:
+  mani-volume:
+
+networks:
+  yesu-network:
+    driver: bridge
+  thrinadh-network:
+    driver: bridge
+  mani-network:
+    driver: bridge
+
